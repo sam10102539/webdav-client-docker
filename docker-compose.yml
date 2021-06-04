@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+    nginx:
+        container_name: ${CONTAINER_PREFIX}
+        restart: always
+        privileged: true
+        cap_add:
+            - SYS_ADMIN
+        devices:
+            - /dev/fuse
+        env_file:
+            - ./.env.production
+        build:
+            context: ./
+            dockerfile: docker/app/Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        # volumes:
+        #     - <your-path>:/lib/modules
+        #     - <your-path>:/var/www/html
+        #     - <your-path>:/var/www/html
